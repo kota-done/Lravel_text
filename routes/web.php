@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +30,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Laravel教科書のテスト用
+Route::get('/test',[TestController::class,'test'])->name('test');
+
+Route::get('/post/create',[PostController::class,'create']);
+
+// 投稿データの保存
+Route::post('post',[PostController::class,'store'])->name('post.store');
+
+//一覧画面の表示
+Route::get('post',[PostController::class,'index']);
 require __DIR__.'/auth.php';
