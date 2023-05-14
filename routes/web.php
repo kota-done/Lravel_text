@@ -15,7 +15,7 @@ use App\Http\Controllers\PostController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// ホームページにGateを追加
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,11 +33,16 @@ Route::middleware('auth')->group(function () {
 // Laravel教科書のテスト用
 Route::get('/test',[TestController::class,'test'])->name('test');
 
-Route::get('/post/create',[PostController::class,'create']);
 
-// 投稿データの保存
-Route::post('post',[PostController::class,'store'])->name('post.store');
+// adminの役割のものしか使用できないようにミドルウェア設定
+// Route::middleware(['auth','admin'])->group(function(){});
+    Route::get('/post/create',[PostController::class,'create']);
+    //一覧画面の表示
+    Route::get('post',[PostController::class,'index']);
+   
 
-//一覧画面の表示
-Route::get('post',[PostController::class,'index']);
+
+ // 投稿データの保存
+ Route::post('post',[PostController::class,'store'])->name('post.store');
+
 require __DIR__.'/auth.php';

@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // リレーションの設定 user(単数)→Post(複数)を持つ可能性が高いためhasManyを使用して連携
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

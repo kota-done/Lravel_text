@@ -12,5 +12,11 @@ class Post extends Model
     protected $fillable =[
         'title',
         'body',
+        'user_id',
     ];
+
+    // 一つの投稿（Post）は一人のユーザーに紐づくためbelongsTo
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
