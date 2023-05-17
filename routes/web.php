@@ -38,11 +38,22 @@ Route::get('/test',[TestController::class,'test'])->name('test');
 // Route::middleware(['auth','admin'])->group(function(){});
     Route::get('/post/create',[PostController::class,'create']);
     //一覧画面の表示
-    Route::get('post',[PostController::class,'index']);
+    Route::get('post',[PostController::class,'index'])->name('post.index');
    
 
 
  // 投稿データの保存
  Route::post('post',[PostController::class,'store'])->name('post.store');
+
+//  個別投稿の表示
+Route::get('post/show/{post}',[PostController::class,'show'])->name('post.show');
+
+// 編集用
+Route::get('post/{post}/edit',[PostController::class,'edit'])->name('post.edit');
+Route::patch('post/{post}',[PostController::class,'update'])->name('post.update');
+
+// 削除用
+Route::delete('post/{post}',[PostController::class,'destroy'])->name('post.destroy');
+
 
 require __DIR__.'/auth.php';
